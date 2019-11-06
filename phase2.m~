@@ -129,7 +129,7 @@ xlabel(' Time(sec)');
 title('Modulated Signal');
 
 % Add Noise
-ook_mod_noise_signal = add_noise(ook_mod_signal,1,5);
+ook_mod_noise_signal = add_noise(ook_mod_signal,1,15);
 subplot(5,1,4);
 plot(t1,ook_mod_noise_signal(1,:),'lineWidth',2.5);grid on;
 axis([ 0 bp*10 -1.5 1.5]);
@@ -140,14 +140,14 @@ title('Modulated Signal with Noise');
 % Demodulation
 ook_demod_signal = ook_mod_noise_signal(1,:).*carrier;
 int_op = [];
-for i = 0:signal_length:length(ook_demod_signal)-signal_length
-    int_ = trapz(ook_demod_signal(i+(signal_length/2):i+(signal_length/2)+1));
+for i = 0:signal_length:length(ook_demod_signal)-s
+    int_ = trapz(ook_demod_signal(i+(s/2):i+(s/2)+1));
     int_op = [int_op int_];
 end
  
 % Threshold
-th = 0.5;
-ook_rec_bits = (round(int_op,1)> th);
+th = 0;
+ook_rec_bits = (round(int_op,1)> );
 ook_rec_signal = sync(ook_rec_bits, signal_length);
 subplot(5,1,5);
 plot(t1,ook_rec_signal,'lineWidth',2.5);grid on;
