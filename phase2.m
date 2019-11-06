@@ -259,68 +259,6 @@ title('recived information as digital signal after binary FSK demodulation');
 
 
 
-% ----- returns 1's and 0's added with noise for different snr ------
-function y = get_unipolar_received_data(s0) %s0 is the baseband data
-
-    S = 1; %signal power
-    snr = 0:5:50; %snr 0 to 50 dB in multiples of 5
-    y = zeros(11, size(s0,2)); % 11x? empty matrix to return
-    
-    for k = 1:11
-        % ---- noise data generation ----
-        n = randn(size(s0)); % generate noise samples
-        SNR = power(10,snr(k)/10); % calculate noise variance
-        Np = S/SNR; %calculate noise power
-        noise = sqrt(Np/2).*n;
-        y(k,:) = s0 + noise;
-    end 
-    
-end
-
-% ----- returns 1's and -1's added with noise for different snr ------
-function y = get_bipolar_received_data(s0) %s0 is the baseband data
-
-    S = 1; %signal power
-    s0 = 2.*s0 - 1;
-    snr = 0:5:50; %snr 0 to 50 dB in multiples of 5
-    y = zeros(11, 1024); % 11x1024 empty matrix to return
-    
-    for k = 1:11
-        % ---- noise data generation ----
-        n = randn(size(s0)); % generate noise samples
-        SNR = power(10,snr(k)/10); % calculate noise variance
-        Np = S/SNR; %calculate noise power
-        noise = sqrt(Np/2).*n;
-        y(k,1:1024) = s0 + noise;
-    end 
-    
-end
-
-% --------------- apply threshold ---------------------
-function y2 = signal_threshold(s0)
-   
-    for rows = 1:size(s0,1)
-        for cols = 1:size(s0,2)
-            if s0(rows,cols) >= 0
-            s0(rows,cols) = 1;
-            else
-                s0(rows,cols) = 0;
-            end
-        end
-    end
-    y2 = s0;
-end
-
-
-% ------ Noise Addition ------
-function noise_signal = add_noise(s0,snr)
-    S = 1; %signal power
-    n = randn(size(s0)); % generate noise samples
-    SNR = power(10,snr/10); % calculate noise variance
-    Np = S/SNR; %calculate noise power
-    noise = sqrt(Np/2).*n;
-    noise_signal = s0 + noise;
-end
 
 % ----- returns error rate by comparing original and received signal ----
 function error_rate = compute_error_rate(N,snr)
