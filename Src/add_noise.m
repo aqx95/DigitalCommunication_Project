@@ -7,4 +7,5 @@ function noise_signal = add_noise(s0,signal_power,snr_db)
     
     noise = sqrt(Np/2).*n;
     noise_signal = s0 + noise;
+    
 end

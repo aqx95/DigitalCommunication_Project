@@ -1,4 +1,4 @@
-% ----- Apply threshold -----
+% ----- Apply Threshold -----
 function y = signal_threshold(s0, threshold)
         for cols = 1:size(s0,2)
             if s0(cols) >= threshold

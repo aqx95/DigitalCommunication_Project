@@ -1,4 +1,4 @@
-% -----Compute bit error-----
+% -----Compute Bit error-----
 function error_rate = compute_error(input,received)
     error = 0;
     for k = 1: size(input,2)
