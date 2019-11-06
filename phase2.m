@@ -257,39 +257,6 @@ title('recived information as digital signal after binary FSK demodulation');
 
 %% FUNCTIONS
 
-
-
-
-% ----- returns error rate by comparing original and received signal ----
-function error_rate = compute_error_rate(N,snr)
-    % compute error rate
-    error_rate = 0;
-    steps = 20;
-    snR = snr;
-    avg_error = 0;
-    for i = 1:steps
-        Error = 0;
-        orig = get_baseband_data(N);
-        trans = 2.*orig - 1;
-        noise_signal = add_noise(trans, snR);
-        for j = 1:N
-            if noise_signal(j)<0
-                noise_signal(j) = -1;
-            else
-                noise_signal(j) = 1;
-            end
-        end
-        for k = 1:1:N
-            if trans(k) ~= noise_signal(k)
-                Error = Error + 1;
-            end
-        end
-        error_rate = Error/N;
-        avg_error = avg_error + error_rate;
-    end
-    error_rate = avg_error/steps;
-end
-
 function sync_signal = sync(data_bits)
     ook_orig_signal = [];
     for n=1:1:length(data_bits)
