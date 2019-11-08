@@ -76,7 +76,7 @@ th = 0;
 bpsk_rec_signal = zeros(1,N);
 index = 1;
 for i = signal_length/2:signal_length:length(bpsk_demod_signal)
-    if bpsk_demod_signal(i) > th
+    if bpsk_demod_signal(i) >= th
         bpsk_rec_signal(index) = 1;
     else
         bpsk_rec_signal(index) = 0;

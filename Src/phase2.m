@@ -81,7 +81,7 @@ ber_bfsk = ber;
 % close all
 
 N = 1024;
-%bin_data = binary_data(N);
+bin_data = binary_data(N);
 snr = 0:2:20;
 ber = (1:11);
 steps = 11; 
@@ -105,7 +105,7 @@ end
 % xlabel('Eb/No (dB)')
 % ylabel('Bit Error Rate')
 % title('Bit Error Rate Performance of BPSK')
-% xlim([0 20])
+% xlim([0 5])
 
 ber_bpsk = ber;
 
