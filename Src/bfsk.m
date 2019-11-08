@@ -69,7 +69,7 @@ for i = 0:signal_length:length(y2)-signal_length
 end
 int = int1_bfsk - int2_bfsk;
 
-bfsk_demod_signal = signal_threshold(int, 0);
+bfsk_demod_signal = signal_threshold(int, 0.5);
 
 bfsk_error_rate = compute_error(bfsk_orig, bfsk_demod_signal);
 
